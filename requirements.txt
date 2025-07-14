@@ -1,0 +1,8 @@
+pandas
+spacy
+matplotlib
+networkx
+bertopic
+transformers
+tweepy
+python-dotenv

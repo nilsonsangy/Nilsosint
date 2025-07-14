@@ -1,0 +1,22 @@
+# Ignore Python virtual environment folders
+venv/
+.env/
+ENV/
+.envrc/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore pipenv and poetry files
+pipenv.lock
+poetry.lock
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore environment variable files
+.env

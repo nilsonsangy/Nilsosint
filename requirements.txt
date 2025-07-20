@@ -6,3 +6,4 @@ bertopic
 transformers
 tweepy
 python-dotenv
+yt_dlp

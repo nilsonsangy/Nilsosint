@@ -1,23 +1,34 @@
 # NilScan
 NilScan is a collection of open-source tools and scripts for OSINT (Open Source Intelligence), focused on digital footprinting, data collection, and target reconnaissance.
 
-## How to set up the Python environment
+## Setup and Installation
 
-You can set up the environment automatically using the provided PowerShell script, or manually if you prefer.
+To install all dependencies and set up the environment, use the provided PowerShell script in the root folder:
 
-### Option 1: Automatic setup (recommended)
-
-Run the setup script in PowerShell:
 ```powershell
 ./setup.ps1
 ```
 This script will:
-- Check if Python 3.8 or newer is installed. If not, it will prompt you to install it.
+- Check if Python 3.11 is installed (and install it if not).
 - Create and activate a virtual environment.
 - Upgrade pip.
 - Install all required packages from requirements.txt.
 
-### Option 2: Manual setup
+Alternatively, you can set up manually (see below).
+
+## Tools Overview
+
+### X (Twitter) Analysis Tool
+- Collects tweets using the official X (Twitter) API.
+- Performs sentiment analysis, topic modeling, named entity recognition, and builds a user mention network graph.
+- Requires X API credentials in a `.env` file (see below).
+
+### YouTube Video Downloader
+- Downloads YouTube videos directly to your Desktop using yt-dlp.
+- Accepts the video URL as a command-line argument or via prompt.
+- Requires ffmpeg installed for best results.
+
+## Manual Python Environment Setup
 
 1. Create and activate the virtual environment:
    ```powershell
@@ -29,7 +40,7 @@ This script will:
    pip install -r requirements.txt
    python -m spacy download en_core_web_sm
    ```
-   > **Note:** If you encounter an error related to compiling packages, ensure you have a compatible Python version (3.8+ recommended) and pip is up to date.
+   > **Note:** If you encounter an error related to compiling packages, ensure you have a compatible Python version (3.11 recommended) and pip is up to date.
 
 ## Environment variables and API credentials
 

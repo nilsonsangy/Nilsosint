@@ -20,3 +20,6 @@ poetry.lock
 
 # Ignore environment variable files
 .env
+
+# Ignore Instagram cookies file
+instagram_cookies.txt

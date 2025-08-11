@@ -25,7 +25,8 @@
   - [YouTube Video Downloader](#youtube-video-downloader)
 - [⚙️ Requirements](#️-requirements)
 - [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+- [�📄 License](#-license)
+- [� Donations](#-donations)
 - [⚠️ Disclaimer](#️-disclaimer)
 - [📞 Contact](#-contact)
 
@@ -146,6 +147,13 @@ Please follow code style conventions and add documentation for new features.
 ---
 
 ## 📄 License
+
+- ✅ Commercial use
+- ✅ Modification
+- ✅ Distribution
+- ✅ Private use
+- ❌ Liability
+- ❌ Warranty
 
 ---
 

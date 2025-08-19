@@ -49,8 +49,9 @@
 git clone https://github.com/nilsonsangy/Nilsosint.git
 cd Nilsosint
 
-# Run the setup script (recommended)
-./setup.ps1
+
+# Run the environment preparation script (recommended)
+./prepare_environment.ps1
 ```
 
 Or set up manually (see Installation).
@@ -67,25 +68,28 @@ Or set up manually (see Installation).
 
 ### Automated Setup (Recommended)
 
+
 You can use the script below to automate all steps:
 
 ```powershell
-./enable_python_environment.ps1
+./prepare_environment.ps1
 ```
 This script will:
 - Check if Python is installed (and install the latest version if not)
-- Create and activate a virtual environment
-- Upgrade pip
+- Create and activate a virtual environment in `.venv`
+- Upgrade pip (before installing anything)
 - Install all required packages from requirements.txt
 - Download the spaCy English model
+- Check and install ffmpeg (Windows only)
 
 ### Manual Setup
 
 If you prefer to do it manually:
 
 ```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
@@ -103,6 +107,7 @@ python Instagram/get_profile_by_userid.py
 ```
 - Follow the instructions in [`Instagram/HOW_TO_EXPORT_INSTAGRAM_COOKIES.md`](Instagram/HOW_TO_EXPORT_INSTAGRAM_COOKIES.md) to export your cookies safely.
 
+
 ### X (Twitter) Analysis
 
 Collect and analyze tweets, perform sentiment analysis, topic modeling, and build mention networks.
@@ -110,7 +115,7 @@ Collect and analyze tweets, perform sentiment analysis, topic modeling, and buil
 ```powershell
 python X/collect_tweets.py
 ```
-- Requires X (Twitter) API credentials in a `.env` file. See `.env-example` for details.
+- Requires X (Twitter) API credentials in a `.env` file at the project root. See the `.env` or `.env-example` file for details.
 
 ### YouTube Video Downloader
 
@@ -120,6 +125,23 @@ Download YouTube videos directly to your desktop.
 python YouTube/video_downloader.py
 ```
 - Requires `yt-dlp` and `ffmpeg` for best results.
+
+---
+
+## 🔑 Environment Variables
+
+This project uses a `.env` file at the root to store your API credentials securely. Example:
+
+```env
+# X (Twitter) API credentials
+API_KEY=your_api_key
+API_SECRET=your_api_secret
+BEARER_TOKEN=your_bearer_token
+ACCESS_TOKEN=your_access_token
+ACCESS_TOKEN_SECRET=your_access_token_secret
+```
+
+Never commit your `.env` file to version control.
 
 ---
 

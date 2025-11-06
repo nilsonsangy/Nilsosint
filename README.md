@@ -1,71 +1,208 @@
-# Nilsosint
-Nilsosint is a collection of open-source tools and scripts for OSINT (Open Source Intelligence), focused on digital footprinting, data collection, and target reconnaissance.
+<div align="center">
 
-## Setup and Installation
+# 🕵️‍♂️ Nilsosint
 
-To install all dependencies and set up the environment, use the provided PowerShell script in the root folder:
+**A powerful toolkit for Open Source Intelligence (OSINT), digital footprinting, and data collection**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)](https://github.com/nilsonsangy/Nilsosint)
+
+*Empowering researchers, investigators, and enthusiasts with automated OSINT tools*
+
+</div>
+
+---
+
+## 📋 Table of Contents
+
+- [🛠️ Tools Overview](#️-tools-overview)
+- [🚀 Quick Start](#-quick-start)
+- [🔧 Installation](#-installation)
+- [📖 Usage](#-usage)
+  - [Instagram User Lookup](#instagram-user-lookup)
+  - [X (Twitter) Analysis](#x-twitter-analysis)
+  - [YouTube Video Downloader](#youtube-video-downloader)
+- [⚙️ Requirements](#️-requirements)
+- [🤝 Contributing](#-contributing)
+- [�📄 License](#-license)
+- [� Donations](#-donations)
+- [⚠️ Disclaimer](#️-disclaimer)
+- [📞 Contact](#-contact)
+
+---
+
+## 🛠️ Tools Overview
+
+| Tool                      | Description                                      | Input                | Output                | Use Case                |
+|---------------------------|--------------------------------------------------|----------------------|-----------------------|-------------------------|
+| **Instagram User Lookup** | Get username and profile link from user ID       | Instagram user ID    | Username, profile URL | OSINT, investigations   |
+| **X (Twitter) Analysis**  | Collect tweets, analyze sentiment, topics, NER   | Twitter username     | CSV, graphs, analysis | Social media research   |
+| **YouTube Downloader**    | Download YouTube videos with yt-dlp              | Video URL            | Video file            | Evidence collection     |
+
+---
+
+## 🚀 Quick Start
 
 ```powershell
-./setup.ps1
+# Clone the repository
+git clone https://github.com/nilsonsangy/Nilsosint.git
+cd Nilsosint
+
+
+# Run the environment preparation script (recommended)
+./prepare_environment.ps1
+```
+
+Or set up manually (see Installation).
+
+---
+
+## 🔧 Installation
+
+### Prerequisites
+
+- **Python 3.x** (any recent version)
+- **pip** (Python package manager)
+- **ffmpeg** (for YouTube downloads, optional but recommended)
+
+### Automated Setup (Recommended)
+
+
+You can use the script below to automate all steps:
+
+```powershell
+./prepare_environment.ps1
 ```
 This script will:
-- Check if Python 3.11 is installed (and install it if not).
-- Create and activate a virtual environment.
-- Upgrade pip.
-- Install all required packages from requirements.txt.
+- Check if Python is installed (and install the latest version if not)
+- Create and activate a virtual environment in `.venv`
+- Upgrade pip (before installing anything)
+- Install all required packages from requirements.txt
+- Download the spaCy English model
+- Check and install ffmpeg (Windows only)
 
-Alternatively, you can set up manually (see below).
+### Manual Setup
 
-## Tools Overview
+If you prefer to do it manually:
 
-### X (Twitter) Analysis Tool
-- Collects tweets using the official X (Twitter) API.
-- Performs sentiment analysis, topic modeling, named entity recognition, and builds a user mention network graph.
-- Requires X API credentials in a `.env` file (see below).
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+```
+
+---
+
+## 📖 Usage
+
+### Instagram User Lookup
+
+Get the username and profile link from an Instagram user ID using your own session cookies.
+
+```powershell
+python Instagram/get_profile_by_userid.py
+```
+- Follow the instructions in [`Instagram/HOW_TO_EXPORT_INSTAGRAM_COOKIES.md`](Instagram/HOW_TO_EXPORT_INSTAGRAM_COOKIES.md) to export your cookies safely.
+
+
+### X (Twitter) Analysis
+
+Collect and analyze tweets, perform sentiment analysis, topic modeling, and build mention networks.
+
+```powershell
+python X/collect_tweets.py
+```
+- Requires X (Twitter) API credentials in a `.env` file at the project root. See the `.env` or `.env-example` file for details.
 
 ### YouTube Video Downloader
-- Downloads YouTube videos directly to your Desktop using yt-dlp.
-- Accepts the video URL as a command-line argument or via prompt.
-- Requires ffmpeg installed for best results.
 
-## Manual Python Environment Setup
+Download YouTube videos directly to your desktop.
 
-1. Create and activate the virtual environment:
-   ```powershell
-   python -m venv venv
-   .\venv\Scripts\Activate.ps1
-   ```
-2. Install the dependencies:
-   ```powershell
-   pip install -r requirements.txt
-   python -m spacy download en_core_web_sm
-   ```
-   > **Note:** If you encounter an error related to compiling packages, ensure you have a compatible Python version (3.11 recommended) and pip is up to date.
+```powershell
+python YouTube/video_downloader.py
+```
+- Requires `yt-dlp` and `ffmpeg` for best results.
 
-## Environment variables and API credentials
+---
 
-This project uses a `.env` file to store your X (Twitter) API credentials securely. The `.env` file should not be committed to version control (see `.gitignore`).
+## 🔑 Environment Variables
 
-1. Copy `.env-example` to `.env`:
-   ```powershell
-   cp .env-example .env
-   ```
-2. Fill in your API credentials in the `.env` file:
-   - `API_KEY`
-   - `API_SECRET`
-   - `BEARER_TOKEN`
-   - `ACCESS_TOKEN`
-   - `ACCESS_TOKEN_SECRET`
+This project uses a `.env` file at the root to store your API credentials securely. Example:
 
-The application will automatically load these credentials using `python-dotenv` and use them to authenticate with the X API via Tweepy.
+```env
+# X (Twitter) API credentials
+API_KEY=your_api_key
+API_SECRET=your_api_secret
+BEARER_TOKEN=your_bearer_token
+ACCESS_TOKEN=your_access_token
+ACCESS_TOKEN_SECRET=your_access_token_secret
+```
 
-## Package descriptions
+Never commit your `.env` file to version control.
 
-- **snscrape**: Twitter scraping tool that works without API keys and is actively maintained.
-- **pandas**: Data analysis and manipulation library.
-- **spacy**: Industrial-strength Natural Language Processing (NLP) library.
-- **matplotlib**: Comprehensive library for creating static, animated, and interactive visualizations in Python.
-- **networkx**: Library for the creation, manipulation, and study of complex networks and graphs.
-- **bertopic**: Topic modeling tool that leverages transformers and c-TF-IDF to create easily interpretable topics.
-- **transformers**: State-of-the-art machine learning library for natural language processing, including pretrained models like BERT.
-- **en_core_web_sm**: spaCy's small English language model for NLP tasks.
+---
+
+## ⚙️ Requirements
+
+- **Operating System**: Windows, Linux, or macOS
+- **Python**: 3.7 or higher
+- **pip**: Latest version recommended
+- **ffmpeg**: For YouTube downloads
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request
+
+Please follow code style conventions and add documentation for new features.
+
+---
+
+## 📄 License
+
+- ✅ Commercial use
+- ✅ Modification
+- ✅ Distribution
+- ✅ Private use
+- ❌ Liability
+- ❌ Warranty
+
+---
+
+## 💝 Donations
+
+If you find this project helpful and would like to support its development, consider making a donation. Your contribution helps keep this toolkit updated and motivates further improvements!
+
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?business=7CC3CMJVYYHAC&no_recurring=0&currency_code=BRL)
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## ⚠️ Disclaimer
+
+This toolkit is for **educational and research purposes only**. Use responsibly and ensure compliance with all applicable laws.
+
+---
+
+## 📞 Contact
+
+- **GitHub Issues**: [Open an issue](https://github.com/nilsonsangy/Nilsosint/issues) for questions or bug reports
+
+<div align="center">
+
+**⭐ If you found this project useful, please give it a star!**
+
+Made with ❤️ for the OSINT community
+
+</div>

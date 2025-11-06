@@ -1,6 +1,7 @@
+
 # YouTube Video Downloader
 
-This tool downloads YouTube videos directly to your Desktop using yt-dlp.
+This tool downloads YouTube videos directly to your Desktop.
 
 ## Requirements
 
